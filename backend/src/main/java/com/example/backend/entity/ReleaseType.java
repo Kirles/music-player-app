@@ -1,4 +1,4 @@
-package com.example.backend.entities;
+package com.example.backend.entity;
 
 public enum ReleaseType {
     SINGLE,
