@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/changes/001-init.sql
   - include:
       file: db/changelog/changes/002-artists-unique-name.sql
+  - include:
+      file: db/changelog/changes/003-change-release-type-to-varchar.sql
