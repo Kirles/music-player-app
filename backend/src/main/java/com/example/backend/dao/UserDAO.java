@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class UserDAO {
@@ -13,7 +14,7 @@ public class UserDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public void save(User user) {
+    public void create(User user) {
         em.persist(user);
     }
 
@@ -29,10 +30,12 @@ public class UserDAO {
         return em.find(User.class, id);
     }
 
-    public User findByUsername(String username) {
+    public Optional<User> findByUsername(String username) {
         return em.createQuery("SELECT u FROM User u WHERE u.username = :username", User.class)
                 .setParameter("username", username)
-                .getSingleResult();
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 
     public List<User> findAll() {

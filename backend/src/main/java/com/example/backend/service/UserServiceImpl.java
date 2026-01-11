@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
     }
 
     public void createUser(User user) {
-        userDao.save(user);
+        userDao.create(user);
     }
 
     public void updateUser(User user) {
@@ -37,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional(readOnly = true)
-    public User getUserByUsername(String username) {
+    public Optional<User> getUserByUsername(String username) {
         return userDao.findByUsername(username);
     }
 

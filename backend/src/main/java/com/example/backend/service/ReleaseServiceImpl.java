@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ReleaseServiceImpl implements ReleaseService{
+public class ReleaseServiceImpl implements ReleaseService {
 
     private final ReleaseDAO releaseDao;
 

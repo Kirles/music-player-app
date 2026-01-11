@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PlaylistServiceImpl {
+public class PlaylistServiceImpl implements PlaylistService {
 
     private final PlaylistDAO playlistDAO;
 
@@ -31,7 +31,7 @@ public class PlaylistServiceImpl {
         playlistDAO.delete(playlist);
     }
 
-    public Playlist getPlaylistByID(Long id) {
+    public Playlist getPlaylistById(Long id) {
         return playlistDAO.findById(id);
     }
 

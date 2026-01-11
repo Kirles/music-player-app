@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ArtistServiceImpl implements ArtistService{
+public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistDAO artistDao;
 

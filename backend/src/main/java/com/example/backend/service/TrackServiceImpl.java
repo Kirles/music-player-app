@@ -10,7 +10,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class TrackServiceImpl {
+public class TrackServiceImpl implements TrackService {
 
     private final TrackDAO trackDAO;
 
