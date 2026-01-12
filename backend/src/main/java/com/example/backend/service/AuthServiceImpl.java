@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 
     public Map<String, String> register(AuthUserRequest request) {
 
-        if(userService.getUserByUsername(request.getUsername()).isPresent()){
+        if(userService.userExistsByUsername(request.getUsername())) {
             throw new RuntimeException("User is already exists");
         }
 
@@ -54,8 +54,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     public Map<String, String> login(AuthUserRequest request) {
-        User user = userService.getUserByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found!"));
+        User user = userService.getUserByUsername(request.getUsername());
 
         if(!passwordEncoder.matches(request.getPassword(), user.getPasswordHash())){
             throw new RuntimeException("Invalid password");

@@ -17,7 +17,9 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    Optional<User> getUserByUsername(String username);
+    User getUserByUsername(String username);
+
+    boolean userExistsByUsername(String username);
 
     List<User> getAllUsers();
 

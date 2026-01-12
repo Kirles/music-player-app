@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -34,12 +33,17 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     public User getUserById(Long id) {
-        return userDao.findById(id);
+        return userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> getUserByUsername(String username) {
-        return userDao.findByUsername(username);
+    public User getUserByUsername(String username) {
+        return userDao.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found!"));
+    }
+
+    @Override
+    public boolean userExistsByUsername(String username) {
+        return userDao.findByUsername(username).isPresent();
     }
 
     @Transactional(readOnly = true)

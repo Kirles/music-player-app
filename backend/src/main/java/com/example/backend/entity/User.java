@@ -27,7 +27,7 @@ public class User {
     private String passwordHash;
 
     @Column(name = "role", nullable = false, length = 50)
-    private String role = "USER";
+    private String role = "ROLE_USER";
 
     @Column(name = "account_locked", nullable = false)
     private Boolean accountLocked = false;

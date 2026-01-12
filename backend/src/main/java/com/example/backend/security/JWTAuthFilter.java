@@ -1,5 +1,7 @@
 package com.example.backend.security;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,13 +29,26 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String header = request.getHeader("Authorization");
+
         if(header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
-            if(jwtUtils.validateToken(token)) {
-                String username = jwtUtils.getUsernameFromToken(token);
+
+            try {
+                Claims claims = jwtUtils.parseToken(token);
+
+                String username = claims.getSubject();
+
+                @SuppressWarnings("unchecked")
+                List<String> roles = (List<String>) claims.get("roles", List.class);
+
+                List<SimpleGrantedAuthority> authorities  = roles.stream().map(SimpleGrantedAuthority::new).toList();
+
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-                        username, null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+                        username, null, authorities);
+
                 SecurityContextHolder.getContext().setAuthentication(auth);
+            } catch (JwtException e) {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             }
         }
 

@@ -26,8 +26,8 @@ public class UserDAO {
         em.remove(em.contains(user)? user : em.merge(user));
     }
 
-    public User findById(Long id) {
-        return em.find(User.class, id);
+    public Optional<User> findById(Long id) {
+        return Optional.ofNullable(em.find(User.class, id));
     }
 
     public Optional<User> findByUsername(String username) {
