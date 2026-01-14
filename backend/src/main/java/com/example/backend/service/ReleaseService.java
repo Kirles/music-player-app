@@ -1,21 +1,23 @@
 package com.example.backend.service;
 
-import com.example.backend.entity.Release;
+import com.example.backend.dto.ReleaseDTO;
+import com.example.backend.dto.ReleaseWithTracksDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReleaseService {
 
-    void createRelease(Release release);
+    ReleaseDTO createRelease(ReleaseDTO release);
 
-    void updateRelease(Release release);
+    ReleaseDTO updateRelease(ReleaseDTO release);
 
-    void deleteRelease(Release release);
+    void deleteRelease(ReleaseDTO release);
 
-    Release getReleaseById(Long id);
+    ReleaseDTO getReleaseById(Long id);
 
-    List<Release> getAllReleases();
+    List<ReleaseDTO> getAllReleases();
 
-    Release getReleaseByIdWithTracks(Long id);
+    ReleaseWithTracksDTO getReleaseByIdWithTracks(Long id);
 
 }

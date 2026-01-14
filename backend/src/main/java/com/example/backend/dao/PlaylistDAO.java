@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class PlaylistDAO {
@@ -17,20 +18,22 @@ public class PlaylistDAO {
         this.em = em;
     }
 
-    public void create(Playlist playlist) {
+    public Playlist create(Playlist playlist) {
         em.persist(playlist);
+        return playlist;
     }
 
-    public void update(Playlist playlist) {
+    public Playlist update(Playlist playlist) {
         em.merge(playlist);
+        return playlist;
     }
 
     public void delete(Playlist playlist) {
         em.remove(em.contains(playlist)? playlist : em.merge(playlist));
     }
 
-    public Playlist findById(Long id) {
-        return em.find(Playlist.class, id);
+    public Optional<Playlist> findById(Long id) {
+        return Optional.ofNullable(em.find(Playlist.class, id));
     }
 
     public List<Playlist> findAll() {

@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class TrackDAO {
@@ -17,20 +18,23 @@ public class TrackDAO {
         this.em = em;
     }
 
-    public void create(Track track) {
+    public Track create(Track track) {
         em.persist(track);
+        return track;
     }
 
-    public void update(Track track) {
+    public Track update(Track track) {
         em.merge(track);
+        return track;
     }
 
-    public void delete(Track track) {
+    public Track delete(Track track) {
         em.remove(em.contains(track)? track : em.merge(track));
+        return track;
     }
 
-    public Track findById(Long id) {
-        return em.find(Track.class, id);
+    public Optional<Track> findById(Long id) {
+        return Optional.ofNullable(em.find(Track.class, id));
     }
 
     public List<Track> findAll() {

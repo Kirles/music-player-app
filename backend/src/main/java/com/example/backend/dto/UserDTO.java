@@ -1,8 +1,8 @@
 package com.example.backend.dto;
 
-import com.example.backend.entity.User;
-
 public class UserDTO {
+
+    private Long id;
 
     private String username;
 
@@ -14,11 +14,12 @@ public class UserDTO {
 
     public UserDTO() {}
 
-    public UserDTO(User user){
-        this.username = user.getUsername();
-        this.email = user.getEmail();
-        this.role = user.getRole();
-        this.accountLocked = user.getAccountLocked();
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

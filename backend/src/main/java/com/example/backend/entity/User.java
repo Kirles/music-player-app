@@ -1,6 +1,5 @@
 package com.example.backend.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -22,7 +21,6 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @JsonIgnore
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
@@ -45,6 +43,10 @@ public class User {
         return this.id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getUsername() {
         return this.username;
     }
@@ -61,7 +63,6 @@ public class User {
         this.email = email;
     }
 
-    @JsonIgnore
     public String getPasswordHash() {
         return this.passwordHash;
     }

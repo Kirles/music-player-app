@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 
+import com.example.backend.dto.UserDTO;
 import com.example.backend.entity.User;
 
 
@@ -9,18 +10,20 @@ import java.util.Optional;
 
 public interface UserService {
 
+    UserDTO createUser(UserDTO dto);
+
     void createUser(User user);
 
-    void updateUser(User user);
+    UserDTO updateUser(UserDTO dto);
 
-    void deleteUser(User user);
+    void deleteUser(UserDTO dto);
 
-    User getUserById(Long id);
+    UserDTO getUserById(Long id);
 
     User getUserByUsername(String username);
 
     boolean userExistsByUsername(String username);
 
-    List<User> getAllUsers();
+    List<UserDTO> getAllUsers();
 
 }

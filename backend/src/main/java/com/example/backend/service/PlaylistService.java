@@ -1,19 +1,20 @@
 package com.example.backend.service;
 
-import com.example.backend.entity.Playlist;
+import com.example.backend.dto.PlaylistDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PlaylistService {
 
-    void createPlaylist(Playlist playlist);
+    PlaylistDTO createPlaylist(PlaylistDTO playlist);
 
-    void updatePlaylist(Playlist playlist);
+    PlaylistDTO updatePlaylist(PlaylistDTO playlist);
 
-    void deletePlaylist(Playlist playlist);
+    void deletePlaylist(PlaylistDTO playlist);
 
-    Playlist getPlaylistById(Long id);
+    PlaylistDTO getPlaylistById(Long id);
 
-    List<Playlist> getAllPlaylists();
+    List<PlaylistDTO> getAllPlaylists();
 
 }

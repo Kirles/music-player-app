@@ -14,16 +14,19 @@ public class UserDAO {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(User user) {
+    public User create(User user) {
         em.persist(user);
+        return user;
     }
 
-    public void update(User user) {
+    public User update(User user) {
         em.merge(user);
+        return user;
     }
 
-    public void delete(User user) {
+    public User delete(User user) {
         em.remove(em.contains(user)? user : em.merge(user));
+        return user;
     }
 
     public Optional<User> findById(Long id) {

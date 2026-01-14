@@ -1,7 +1,8 @@
 package com.example.backend.service;
 
 import com.example.backend.dao.ArtistDAO;
-import com.example.backend.entity.Artist;
+import com.example.backend.dto.ArtistDTO;
+import com.example.backend.mapper.ArtistMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,30 +15,33 @@ public class ArtistServiceImpl implements ArtistService {
 
     private final ArtistDAO artistDao;
 
+    private final ArtistMapper artistMapper;
+
     @Autowired
-    public ArtistServiceImpl(ArtistDAO artistDao){
+    public ArtistServiceImpl(ArtistDAO artistDao, ArtistMapper artistMapper){
         this.artistDao = artistDao;
+        this.artistMapper = artistMapper;
     }
 
-    public void createArtist(Artist artist) {
-        artistDao.create(artist);
+    public ArtistDTO createArtist(ArtistDTO dto) {
+        return artistMapper.toDto(artistDao.create(artistMapper.toEntity(dto)));
     }
 
-    public void updateArtist(Artist artist) {
-        artistDao.update(artist);
+    public ArtistDTO updateArtist(ArtistDTO dto) {
+        return artistMapper.toDto(artistDao.update(artistMapper.toEntity(dto)));
     }
 
-    public void deleteArtist(Artist artist) {
-        artistDao.delete(artist);
-    }
-
-    @Transactional(readOnly = true)
-    public Artist getArtistById(Long id) {
-        return artistDao.findById(id);
+    public void deleteArtist(ArtistDTO dto) {
+        artistDao.delete(artistMapper.toEntity(dto));
     }
 
     @Transactional(readOnly = true)
-    public List<Artist> getAllArtists() {
-        return artistDao.findAll();
+    public ArtistDTO getArtistById(Long id) {
+        return artistMapper.toDto(artistDao.findById(id).orElseThrow(() -> new RuntimeException("Artist not found!")));
+    }
+
+    @Transactional(readOnly = true)
+    public List<ArtistDTO> getAllArtists() {
+        return artistMapper.toDtoList(artistDao.findAll());
     }
 }

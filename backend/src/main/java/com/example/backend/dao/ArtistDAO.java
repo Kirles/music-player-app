@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ArtistDAO {
@@ -17,20 +18,22 @@ public class ArtistDAO {
         this.em = em;
     }
 
-    public void create(Artist artist) {
+    public Artist create(Artist artist) {
         em.persist(artist);
+        return artist;
     }
 
-    public void update(Artist artist) {
+    public Artist update(Artist artist) {
         em.merge(artist);
+        return artist;
     }
 
     public void delete(Artist artist) {
         em.remove(em.contains(artist)? artist : em.merge(artist));
     }
 
-    public Artist findById(Long id) {
-        return em.find(Artist.class, id);
+    public Optional<Artist> findById(Long id) {
+        return Optional.ofNullable(em.find(Artist.class, id));
     }
 
     public List<Artist> findAll() {

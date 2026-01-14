@@ -1,18 +1,20 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.TrackDTO;
 import com.example.backend.entity.Track;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TrackService {
 
-    void createTrack(Track track);
+    TrackDTO createTrack(TrackDTO track);
 
-    void updateTrack(Track track);
+    TrackDTO updateTrack(TrackDTO track);
 
-    void deleteTrack(Track track);
+    void deleteTrack(TrackDTO track);
 
-    Track getTrackById(Long id);
+    TrackDTO getTrackById(Long id);
 
-    List<Track> getAllTracks();
+    List<TrackDTO> getAllTracks();
 }

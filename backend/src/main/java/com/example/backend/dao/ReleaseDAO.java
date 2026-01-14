@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ReleaseDAO {
@@ -17,30 +18,35 @@ public class ReleaseDAO {
         this.em = em;
     }
 
-    public void create(Release release) {
+    public Release create(Release release) {
         em.persist(release);
+        return release;
     }
 
-    public void update(Release release) {
+    public Release update(Release release) {
         em.merge(release);
+        return release;
     }
 
-    public void delete(Release release) {
+    public Release delete(Release release) {
         em.remove(em.contains(release)? release : em.merge(release));
+        return release;
     }
 
-    public Release findById(Long id) {
-        return em.find(Release.class, id);
+    public Optional<Release> findById(Long id) {
+        return Optional.ofNullable(em.find(Release.class, id));
     }
 
     public List<Release> findAll() {
         return em.createQuery("SELECT r FROM Release r", Release.class).getResultList();
     }
 
-    public Release findByIdWithTracks(Long id) {
+    public Optional<Release> findByIdWithTracks(Long id) {
         return em.createQuery(
                 "SELECT r FROM Release r LEFT JOIN FETCH r.tracks WHERE r.id = :id", Release.class)
                 .setParameter("id", id)
-                .getSingleResult();
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 }

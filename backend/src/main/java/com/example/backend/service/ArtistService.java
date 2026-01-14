@@ -1,18 +1,20 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.ArtistDTO;
 import com.example.backend.entity.Artist;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ArtistService {
 
-    void createArtist(Artist artist);
+    ArtistDTO createArtist(ArtistDTO artist);
 
-    void updateArtist(Artist artist);
+    ArtistDTO updateArtist(ArtistDTO artist);
 
-    void deleteArtist(Artist artist);
+    void deleteArtist(ArtistDTO artist);
 
-    Artist getArtistById(Long id);
+    ArtistDTO getArtistById(Long id);
 
-    List<Artist> getAllArtists();
+    List<ArtistDTO> getAllArtists();
 }
