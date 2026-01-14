@@ -97,4 +97,15 @@ public class Release {
     public void setTracks(List<Track> tracks) {
         this.tracks = tracks;
     }
+
+    public void addTrack(Track track) {
+        this.totalTracks = tracks.size() + 1;
+        this.tracks.add(track);
+    }
+
+    public void deleteTrack(Track track) {
+        this.totalTracks = tracks.size() - 1;
+        this.tracks.remove(track);
+    }
+
 }

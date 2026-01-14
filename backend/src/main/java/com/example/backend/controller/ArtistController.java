@@ -2,7 +2,6 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.ArtistDTO;
 import com.example.backend.service.ArtistService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,9 +28,9 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleteArtist(@RequestBody ArtistDTO artistDTO) {
+    public ResponseEntity<Void> deleteArtist(@RequestBody ArtistDTO artistDTO) {
         artistService.deleteArtist(artistDTO);
-        return HttpStatus.OK;
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping

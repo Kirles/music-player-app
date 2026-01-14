@@ -2,8 +2,8 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.ReleaseDTO;
 import com.example.backend.dto.ReleaseWithTracksDTO;
+import com.example.backend.dto.TrackDTO;
 import com.example.backend.service.ReleaseService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,9 +30,9 @@ public class ReleaseController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleteRelease(@RequestBody ReleaseDTO releaseDTO) {
+    public ResponseEntity<Void> deleteRelease(@RequestBody ReleaseDTO releaseDTO) {
         releaseService.deleteRelease(releaseDTO);
-        return HttpStatus.OK;
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
@@ -45,4 +45,13 @@ public class ReleaseController {
         return ResponseEntity.ok(releaseService.getReleaseByIdWithTracks(id));
     }
 
+    @PostMapping("/{id}/tracks")
+    public ResponseEntity<ReleaseWithTracksDTO> addTrackToRelease(@PathVariable Long id, @RequestBody TrackDTO trackDTO) {
+        return ResponseEntity.ok(releaseService.addTrackToRelease(id, trackDTO));
+    }
+
+    @DeleteMapping("/{releaseId}/tracks/{trackId}")
+    public ResponseEntity<ReleaseWithTracksDTO> deleteTrackFromRelease(@PathVariable Long releaseId, @PathVariable Long trackId) {
+        return ResponseEntity.ok(releaseService.deleteTrackFromRelease(releaseId, trackId));
+    }
 }

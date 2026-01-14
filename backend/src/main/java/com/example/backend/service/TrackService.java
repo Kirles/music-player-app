@@ -8,13 +8,6 @@ import java.util.Optional;
 
 public interface TrackService {
 
-    TrackDTO createTrack(TrackDTO track);
-
-    TrackDTO updateTrack(TrackDTO track);
-
-    void deleteTrack(TrackDTO track);
-
     TrackDTO getTrackById(Long id);
 
-    List<TrackDTO> getAllTracks();
 }

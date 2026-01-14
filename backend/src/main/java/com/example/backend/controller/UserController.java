@@ -2,7 +2,6 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.UserDTO;
 import com.example.backend.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +27,9 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleteUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Void> deleteUser(@RequestBody UserDTO userDTO) {
         userService.deleteUser(userDTO);
-        return HttpStatus.OK;
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -79,4 +79,12 @@ public class Playlist {
         this.tracks = tracks;
     }
 
+    public void addTrack(Track track){
+        this.tracks.add(track);
+    }
+
+    public void deleteTrack(Track track){
+        this.tracks.remove(track);
+    }
+
 }
