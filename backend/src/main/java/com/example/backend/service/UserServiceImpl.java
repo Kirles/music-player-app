@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
         return userMapper.toDto(userDao.update(userMapper.toEntity(dto)));
     }
 
-    public void deleteUser(UserDTO dto) {
-        userDao.delete(userMapper.toEntity(dto));
+    public void deleteUser(Long id) {
+        userDao.delete(id);
     }
 
     @Transactional(readOnly = true)
@@ -48,6 +48,11 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public User getUserByUsername(String username) {
         return userDao.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found!"));
+    }
+
+    @Transactional(readOnly = true)
+    public User getUserEntityById(Long id) {
+        return userDao.findById(id).orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
     @Override

@@ -16,11 +16,13 @@ public interface UserService {
 
     UserDTO updateUser(UserDTO dto);
 
-    void deleteUser(UserDTO dto);
+    void deleteUser(Long id);
 
     UserDTO getUserById(Long id);
 
     User getUserByUsername(String username);
+
+    User getUserEntityById(Long id);
 
     boolean userExistsByUsername(String username);
 

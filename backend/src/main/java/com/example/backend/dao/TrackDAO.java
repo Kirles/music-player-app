@@ -28,9 +28,8 @@ public class TrackDAO {
         return track;
     }
 
-    public Track delete(Track track) {
-        em.remove(em.contains(track)? track : em.merge(track));
-        return track;
+    public void delete(Long id) {
+        em.remove(em.find(Track.class, id));
     }
 
     public Optional<Track> findById(Long id) {

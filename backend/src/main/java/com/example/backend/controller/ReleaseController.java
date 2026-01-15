@@ -1,5 +1,6 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.CreateReleaseRequest;
 import com.example.backend.dto.ReleaseDTO;
 import com.example.backend.dto.ReleaseWithTracksDTO;
 import com.example.backend.dto.TrackDTO;
@@ -25,13 +26,13 @@ public class ReleaseController {
     }
 
     @PostMapping
-    public ResponseEntity<ReleaseDTO> createRelease(@RequestBody ReleaseDTO releaseDTO) {
-        return ResponseEntity.ok(releaseService.createRelease(releaseDTO));
+    public ResponseEntity<ReleaseDTO> createRelease(@RequestBody CreateReleaseRequest request) {
+        return ResponseEntity.ok(releaseService.createRelease(request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRelease(@RequestBody ReleaseDTO releaseDTO) {
-        releaseService.deleteRelease(releaseDTO);
+    public ResponseEntity<Void> deleteRelease(@PathVariable Long id) {
+        releaseService.deleteRelease(id);
         return ResponseEntity.noContent().build();
     }
 

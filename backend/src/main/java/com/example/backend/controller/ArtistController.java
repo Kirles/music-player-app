@@ -28,8 +28,8 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteArtist(@RequestBody ArtistDTO artistDTO) {
-        artistService.deleteArtist(artistDTO);
+    public ResponseEntity<Void> deleteArtist(@PathVariable Long id) {
+        artistService.deleteArtist(id);
         return ResponseEntity.noContent().build();
     }
 

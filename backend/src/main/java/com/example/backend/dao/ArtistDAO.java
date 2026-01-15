@@ -28,8 +28,8 @@ public class ArtistDAO {
         return artist;
     }
 
-    public void delete(Artist artist) {
-        em.remove(em.contains(artist)? artist : em.merge(artist));
+    public void delete(Long id) {
+        em.remove(em.find(Artist.class, id));
     }
 
     public Optional<Artist> findById(Long id) {

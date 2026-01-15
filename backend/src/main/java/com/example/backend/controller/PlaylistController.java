@@ -1,10 +1,13 @@
 package com.example.backend.controller;
 
+import com.example.backend.dto.CreatePlaylistRequest;
 import com.example.backend.dto.PlaylistDTO;
 import com.example.backend.service.PlaylistService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/user/playlists")
 public class PlaylistController {
 
     private final PlaylistService playlistService;
@@ -20,13 +23,13 @@ public class PlaylistController {
     }
 
     @PostMapping
-    public ResponseEntity<PlaylistDTO> createPlaylist(@RequestBody PlaylistDTO playlistDTO) {
-        return ResponseEntity.ok(playlistService.createPlaylist(playlistDTO));
+    public ResponseEntity<PlaylistDTO> createPlaylist(@RequestBody CreatePlaylistRequest request) {
+        return ResponseEntity.ok(playlistService.createPlaylist(request));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePlaylist(@RequestBody PlaylistDTO playlistDTO) {
-        playlistService.deletePlaylist(playlistDTO);
+    public ResponseEntity<Void> deletePlaylist(@PathVariable Long id) {
+        playlistService.deletePlaylist(id);
         return ResponseEntity.noContent().build();
     }
 

@@ -24,9 +24,8 @@ public class UserDAO {
         return user;
     }
 
-    public User delete(User user) {
-        em.remove(em.contains(user)? user : em.merge(user));
-        return user;
+    public void delete(Long id) {
+        em.remove(em.find(User.class, id));
     }
 
     public Optional<User> findById(Long id) {

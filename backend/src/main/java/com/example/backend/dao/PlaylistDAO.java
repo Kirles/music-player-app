@@ -28,8 +28,8 @@ public class PlaylistDAO {
         return playlist;
     }
 
-    public void delete(Playlist playlist) {
-        em.remove(em.contains(playlist)? playlist : em.merge(playlist));
+    public void delete(Long id) {
+        em.remove(em.find(Playlist.class, id));
     }
 
     public Optional<Playlist> findById(Long id) {

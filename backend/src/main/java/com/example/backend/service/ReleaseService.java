@@ -1,5 +1,6 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.CreateReleaseRequest;
 import com.example.backend.dto.ReleaseDTO;
 import com.example.backend.dto.ReleaseWithTracksDTO;
 import com.example.backend.dto.TrackDTO;
@@ -9,11 +10,11 @@ import java.util.Optional;
 
 public interface ReleaseService {
 
-    ReleaseDTO createRelease(ReleaseDTO release);
+    ReleaseDTO createRelease(CreateReleaseRequest request);
 
     ReleaseDTO updateRelease(ReleaseDTO release);
 
-    void deleteRelease(ReleaseDTO release);
+    void deleteRelease(Long id);
 
     ReleaseDTO getReleaseById(Long id);
 

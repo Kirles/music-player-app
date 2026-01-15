@@ -28,9 +28,8 @@ public class ReleaseDAO {
         return release;
     }
 
-    public Release delete(Release release) {
-        em.remove(em.contains(release)? release : em.merge(release));
-        return release;
+    public void delete(Long id) {
+        em.remove(em.find(Release.class, id));
     }
 
     public Optional<Release> findById(Long id) {

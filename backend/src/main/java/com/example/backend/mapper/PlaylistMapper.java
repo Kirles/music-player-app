@@ -1,8 +1,11 @@
 package com.example.backend.mapper;
 
+import com.example.backend.dto.CreatePlaylistRequest;
+import com.example.backend.dto.CreateReleaseRequest;
 import com.example.backend.dto.PlaylistDTO;
 import com.example.backend.dto.PlaylistWithTracksDTO;
 import com.example.backend.entity.Playlist;
+import com.example.backend.entity.Release;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -13,6 +16,8 @@ public interface PlaylistMapper {
     PlaylistDTO toDto(Playlist playlist);
 
     Playlist toEntity(PlaylistDTO dto);
+
+    Playlist toEntity(CreatePlaylistRequest dto);
 
     List<PlaylistDTO> toDtoList(List<Playlist> playlists);
 

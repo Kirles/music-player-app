@@ -12,9 +12,11 @@ public interface ArtistService {
 
     ArtistDTO updateArtist(ArtistDTO artist);
 
-    void deleteArtist(ArtistDTO artist);
+    void deleteArtist(Long id);
 
     ArtistDTO getArtistById(Long id);
+
+    Artist getArtistEntityById(Long id);
 
     List<ArtistDTO> getAllArtists();
 }

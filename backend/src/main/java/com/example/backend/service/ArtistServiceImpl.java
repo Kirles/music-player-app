@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.dao.ArtistDAO;
 import com.example.backend.dto.ArtistDTO;
+import com.example.backend.entity.Artist;
 import com.example.backend.mapper.ArtistMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,13 +32,18 @@ public class ArtistServiceImpl implements ArtistService {
         return artistMapper.toDto(artistDao.update(artistMapper.toEntity(dto)));
     }
 
-    public void deleteArtist(ArtistDTO dto) {
-        artistDao.delete(artistMapper.toEntity(dto));
+    public void deleteArtist(Long id) {
+        artistDao.delete(id);
     }
 
     @Transactional(readOnly = true)
     public ArtistDTO getArtistById(Long id) {
         return artistMapper.toDto(artistDao.findById(id).orElseThrow(() -> new RuntimeException("Artist not found!")));
+    }
+
+    @Transactional(readOnly = true)
+    public Artist getArtistEntityById(Long id) {
+        return artistDao.findById(id).orElseThrow(() -> new RuntimeException("Artist not found!"));
     }
 
     @Transactional(readOnly = true)
