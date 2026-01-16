@@ -1,6 +1,7 @@
 package com.example.backend.dao;
 
 import com.example.backend.entity.Playlist;
+import com.example.backend.entity.Release;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -38,6 +39,15 @@ public class PlaylistDAO {
 
     public List<Playlist> findAll() {
         return em.createQuery("SELECT r FROM Release r", Playlist.class).getResultList();
+    }
+
+    public Optional<Playlist> findByIdWithTracks(Long id) {
+        return em.createQuery(
+                "SELECT p FROM Playlist p LEFT JOIN FETCH p.tracks pt WHERE p.id = :id ", Playlist.class)
+                .setParameter("id", id)
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.dao.TrackDAO;
 import com.example.backend.dto.TrackDTO;
+import com.example.backend.entity.Track;
 import com.example.backend.mapper.TrackMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,11 @@ public class TrackServiceImpl implements TrackService {
     @Transactional(readOnly = true)
     public TrackDTO getTrackById(Long id) {
         return trackMapper.toDto(trackDAO.findById(id).orElseThrow(() -> new RuntimeException("Track not found!")));
+    }
+
+    @Transactional(readOnly = true)
+    public Track getTrackEntityById(Long id){
+        return trackDAO.findById(id).orElseThrow(() -> new RuntimeException("Track not found!"));
     }
 
 }

@@ -49,11 +49,11 @@ public class Track {
         this.title = title;
     }
 
-    public int getDurationSec() {
+    public Integer getDurationSec() {
         return this.durationSec;
     }
 
-    public void setDurationSec(int durationSec) {
+    public void setDurationSec(Integer durationSec) {
         this.durationSec = durationSec;
     }
 

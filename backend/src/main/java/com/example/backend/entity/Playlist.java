@@ -23,7 +23,7 @@ public class Playlist {
     private User user;
 
     @Column(name = "total_tracks")
-    private Integer totalTracks;
+    private Integer totalTracks = 0;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
@@ -80,10 +80,12 @@ public class Playlist {
     }
 
     public void addTrack(Track track){
+        this.totalTracks++;
         this.tracks.add(track);
     }
 
     public void deleteTrack(Track track){
+        this.totalTracks--;
         this.tracks.remove(track);
     }
 

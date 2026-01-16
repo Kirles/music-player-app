@@ -10,4 +10,6 @@ public interface TrackService {
 
     TrackDTO getTrackById(Long id);
 
+    Track getTrackEntityById(Long id);
+
 }
